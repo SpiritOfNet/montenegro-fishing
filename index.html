@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#28251e">
+  <meta name="description" content="Полевой атлас рыбалки в Черногории: море, реки, озёра, виды рыб, сезоны и ограничения. Интерактивная карта для телефона.">
+  <title>Рыбацкие земли — Черногория</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="vendor/markercluster/MarkerCluster.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="rdr.css">
+</head>
+<body>
+  <a class="skip" href="#place-list">К списку мест</a>
+  <header class="masthead">
+    <a class="brand" href="./" aria-label="Рыбацкие земли — главная"><span class="brand-seal" aria-hidden="true">✦</span><span><span class="brand-kicker">ПОЛЕВОЙ АТЛАС ЧЕРНОГОРИИ</span><strong>РЫБАЦКИЕ ЗЕМЛИ</strong></span></a>
+    <div class="edition"><span>МОРЕ · РЕКИ · ОЗЁРА</span><small>Исследовано 27 октября 2026</small></div>
+    <nav class="header-actions" aria-label="Разделы"><button id="fish-book-btn" class="text-button">Рыбы</button><button id="sources-btn" class="text-button">Об атласе</button><button id="favorite-toggle" class="icon-button" aria-label="Показать избранные места" aria-pressed="false">☆</button></nav>
+  </header>
+  <main class="atlas-shell">
+    <aside class="explorer" aria-label="Поиск мест">
+      <div class="explorer-top"><div class="section-kicker">ВЫБЕРИ СВОЙ БЕРЕГ</div><h1>Куда отправимся?</h1><p class="intro">От Адриатики до горных озёр.</p>
+        <label class="search-box"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Место, река или город…" autocomplete="off" aria-label="Поиск по месту, рыбе или городу"><kbd>/</kbd></label>
+        <div class="water-tabs" role="group" aria-label="Тип водоёма"><button data-water="all" aria-pressed="true">Все воды</button><button data-water="sea" aria-pressed="false">Море</button><button data-water="river" aria-pressed="false">Реки</button><button data-water="lake" aria-pressed="false">Озёра</button></div>
+        <div class="filter-grid"><label>За какой рыбой?<select id="fish-filter"><option value="all">Любая рыба</option></select></label><label>Когда поедем?<select id="month-filter"><option value="all">Любое время</option></select></label></div>
+        <div class="filter-grid secondary-filters"><label>Часть страны<select id="region-filter"><option value="all">Вся Черногория</option><option value="coast">Побережье</option><option value="central">Центральная часть</option><option value="north">Север и горы</option></select></label><label class="checkbox-label"><input id="hide-closed" type="checkbox"><span>Скрыть известные запреты</span></label></div>
+        <label class="bank-only-label"><input id="bank-only" type="checkbox"><span>Только где береговая ловля описана в источнике</span></label>
+        <div id="month-help" class="month-help" hidden>Месяц показывает обычный сезон активности. Это не прогноз клёва и не разрешение на ловлю.</div>
+        <div class="mobile-filter-actions"><button id="mobile-apply-filters">Показать на карте</button><button id="mobile-reset-filters">Сбросить</button></div>
+      </div>
+      <div class="results-heading"><span id="results-count" aria-live="polite"></span><button id="reset-filters" class="small-link" hidden>Сбросить</button></div>
+      <div id="place-list" class="place-list" aria-label="Найденные районы"></div>
+      <div class="explorer-footer"><span class="ink-dot"></span><span>Районы ловли, а не гарантированные точки заброса</span></div>
+    </aside>
+    <section class="map-region" aria-label="Интерактивная карта Черногории">
+      <div id="map"></div>
+      <div class="map-topline"><span class="map-title">MONTENEGRO <span>·</span> CRNA GORA</span><div class="basemap-switch" aria-label="Вид карты"><button id="atlas-mode" aria-pressed="true">Атлас</button><button id="roads-mode" aria-pressed="false">Дороги</button></div></div>
+      <div class="compass" aria-hidden="true"><span>С</span><b>✥</b><span>Ю</span></div>
+      <div class="map-controls"><button id="zoom-in" aria-label="Приблизить">+</button><button id="zoom-out" aria-label="Отдалить">−</button><div class="control-separator"></div><button id="fit-map" aria-label="Показать всю Черногорию">⌖</button><button id="locate-me" aria-label="Моё местоположение">◎</button></div>
+      <div class="map-caption"><span class="drawn-line"></span><span>Здесь начинается хорошая история.</span></div>
+      <div class="map-bottom"><button id="illustration-toggle" aria-pressed="true">Рисунки рыб <span>вкл.</span></button><span id="map-status">Масштабируй и выбирай отметку</span></div>
+      <section id="place-detail" class="place-detail" aria-label="Карточка выбранного места" hidden></section>
+      <div id="toast" class="toast" role="status" hidden></div>
+    </section>
+  </main>
+  <nav class="mobile-nav" aria-label="Мобильный вид"><button data-view="map" aria-pressed="true">⌖ Карта</button><button data-view="list" aria-pressed="false">☷ Места <span id="mobile-count"></span></button><button id="mobile-filter-btn">⚒ Фильтры <span id="filter-count"></span></button></nav>
+  <dialog id="info-dialog"><div class="dialog-head"><span class="section-kicker">ПОЛЕВЫЕ ЗАПИСИ</span><button class="dialog-close icon-button" aria-label="Закрыть">×</button></div><div id="info-content"></div></dialog>
+  <dialog id="fish-dialog"><div class="dialog-head"><span class="section-kicker">ИХТИОЛОГИЧЕСКИЙ СПРАВОЧНИК</span><button class="dialog-close icon-button" aria-label="Закрыть">×</button></div><h2>Рыбы этих земель</h2><p class="dialog-intro">Выбери вид, чтобы найти соответствующие районы. Иллюстрации художественные, не определитель видов.</p><div id="fish-grid"></div></dialog>
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <script src="vendor/markercluster/leaflet.markercluster.js"></script>
+  <script src="data.js"></script>
+  <script src="assets/geography.js"></script>
+  <script src="assets/drawn-geography.js"></script>
+  <script src="drawn-map.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
