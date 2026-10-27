@@ -1,5 +1,12 @@
 # Карандашные рыбы · версия 1.2
 
+
+## Дополнение 1.3: семь недостающих рыб
+Файл: fish-sketches-extra.png, 1086 × 1448, прозрачный RGBA. Создан встроенным image_gen по референсу исходных карандашных рыб. Раскладка: два столбца, четыре ряда; последний правый сектор пуст. Рисунки художественные, не определитель видов.
+
+Промпт:
+Use case: scientific-educational. Create a supplementary sprite sheet for an illustrated fishing field journal website, matching the supplied reference's graphite pencil and restrained warm sepia linework, pale fish bodies, delicate hand drawn hatching. Reference image is STYLE ONLY: draw SEVEN NEW SPECIES, not the reference species. Transparent background, no paper, no shadows, no letters, no numbers, no labels, no borders. Portrait canvas arranged as exactly TWO COLUMNS and FOUR EQUAL ROWS, each fish entirely contained within its own cell with ample transparent padding. All fish side view, heads LEFT. Row1 left: rainbow trout Oncorhynchus mykiss, speckled body and tail, subtle lateral band. Row1 right: nase Chondrostoma, elongated cyprinid body, projecting rounded snout and inferior mouth. Row2 left: Skadar bleak Alburnus scoranza, small slender silvery fish, upturned mouth and deeply forked tail. Row2 right: European eel Anguilla anguilla, elongated serpentine body with continuous dorsal caudal anal fin, arranged as gentle horizontal S to fit cell. Row3 left: Wels catfish Silurus glanis, broad flattened head, long barbels, scaleless body and long anal fin. Row3 right: char Salvelinus, streamlined salmonid with pale spots on darker body, light leading edges of lower fins. Row4 left: bluefish Pomatomus saltatrix, robust elongated body, powerful jaw, two dorsal fins and forked tail. Row4 right: EMPTY TRANSPARENT CELL. Species silhouettes clearly distinct; complete fish with intact fins and tails, no overlap. Consistent detailed naturalist pencil sketch quality, not vector icons, no bright color.
+
 Файл: `assets/fish-sketches.png`, 1086 × 1448, RGBA с прозрачностью. Создан встроенным `image_gen` как художественная переработка исходной таблицы `fish-plate.png`. Исходная цветная версия оставлена в комплекте; сайт использует новые рисунки.
 
 Двенадцать видов расположены в 3 колонки и 4 ряда: дорада, сибас, кефаль; сарг, сарган, ставрида; ручьевая форель, хариус, карп; серебряный карась, окунь, голавль. Параметры отображения каждого экземпляра находятся в `data.js`. Это художественные наброски, не надёжный определитель видов.

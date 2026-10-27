@@ -34,7 +34,8 @@
   function art(id,cls='',label='') {
     const f=fishById[id];if(!f?.art)return `<span class="no-fish-art ${cls}" aria-hidden="true">✦</span>`;
     const clip='specimen-'+(++artSerial),[x,y,w,h]=f.art;
-    return `<svg class="fish-art ${cls}" viewBox="${f.art.join(' ')}" ${label?`role="img" aria-label="${esc(label)}"`:'aria-hidden="true"'}><defs><clipPath id="${clip}"><rect x="${x}" y="${y}" width="${w}" height="${h}"/></clipPath></defs><image href="assets/fish-sketches.png" width="1086" height="1448" clip-path="url(#${clip})"/></svg>`;
+    const sheet=f.artSheet||'assets/fish-sketches.png';
+    return `<svg class="fish-art ${cls}" viewBox="${f.art.join(' ')}" ${label?`role="img" aria-label="${esc(label)}"`:'aria-hidden="true"'}><defs><clipPath id="${clip}"><rect x="${x}" y="${y}" width="${w}" height="${h}"/></clipPath></defs><image href="${sheet}" width="1086" height="1448" clip-path="url(#${clip})"/></svg>`;
   }
   function fishIllustration(p) {
     if(state.fish!=='all'&&fishById[state.fish]?.art)return state.fish;
@@ -253,4 +254,3 @@
   // For local verification and maintainers; no telemetry or external state mutation.
   window.atlasDebug={state,filtered,status,speciesClosure,overlap,map,selectPlace};
 })();
-
